@@ -600,7 +600,7 @@ function updatePairTabs() {
     }
     
     familyChecker.currentPair = 1;
-    // Thông báo tạo cặp list mail đã bị xóa theo yêu cầu
+    showToast(`Đã tạo ${numberOfPairs} cặp list mail`, 'success');
 }
 
 

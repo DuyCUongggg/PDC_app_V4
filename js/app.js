@@ -1158,26 +1158,17 @@
         bindPriceInput(document.getElementById('editProductPrice'));
         updateHeaderStats(); renderProductList();
         if (typeof updateTabs === 'function') updateTabs();
-        // Load both products and notes simultaneously using Promise.all
-        Promise.all([
-            loadFromGoogleSheets().then(() => {
-                // Force update tabs after loading
-                setTimeout(() => {
-                    if (typeof updateTabs === 'function') updateTabs();
-                }, 100);
-            }).catch(() => {
-                // Still update tabs even if loading fails
-                setTimeout(() => {
-                    if (typeof updateTabs === 'function') updateTabs();
-                }, 100);
-            }),
-            loadNotesFromGoogleSheets().catch(() => {
-                // Handle error silently
-            })
-        ]).then(() => {
-            console.log('✅ Both products and notes loaded');
+        // Auto load from Google Sheets on startup
+        loadFromGoogleSheets().then(() => {
+            // Force update tabs after loading
+            setTimeout(() => {
+                if (typeof updateTabs === 'function') updateTabs();
+            }, 100);
         }).catch(() => {
-            console.log('⚠️ Some data loading failed');
+            // Still update tabs even if loading fails
+            setTimeout(() => {
+                if (typeof updateTabs === 'function') updateTabs();
+            }, 100);
         });
         
         // Show current version  
